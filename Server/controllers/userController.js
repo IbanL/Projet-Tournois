@@ -35,7 +35,7 @@ const getUser = async (req, res, next) => {
     try {
     const user = await User.findById(req.params.id).select("-password");
     if (!user) {
-        throw new Error("user not found");
+        throw new Error("utilisateur introvable");
     }
     res.status(200).json({ user });
     } catch (error) {
@@ -44,15 +44,27 @@ const getUser = async (req, res, next) => {
 }
 
 const updateUser = async (req, res, next) => {
+  //recuperation des parametres a mettre a jour
   const { name, email, password } = req.body;
     try {
+
+        //verification si l'utilisateur existe
+        const userExists = await User.findById(req.params.id);
+        if (!userExists) {
+            throw new Error("utilisateur introvable");
+        }
+
+        //verification si l'utilisateur essayant de modifier est bien le même
+        const isSameUser = userExists._id.toString() === req.user._id.toString();
+        if (!isSameUser) {
+            throw new Error("accès non autorisé");
+        }
+        //mise a jour de l'utilisateur
         const user = await User.findByIdAndUpdate(req.params.id, { name, email, password }, {
           new: true,
         });
         res.status(200).json({ user });
-        if (!user) {
-          throw new Error("User not found");
-        }
+
       } catch (error) {
         next(error);
       }

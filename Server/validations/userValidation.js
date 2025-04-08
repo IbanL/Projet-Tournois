@@ -1,7 +1,7 @@
 import { body, param } from "express-validator";
 
 export const validateUserId = [
-  param("id").isMongoId().withMessage("id non valide"),
+  param("id").isMongoId().withMessage("id de l'utilisateur non valide"),
 ]
 
 export const registerValidation = [
@@ -20,7 +20,7 @@ export const registerValidation = [
 
 
 export const updateValidation = [
-  param("id").isMongoId().withMessage("id non valide"),
+  param("id").isMongoId().withMessage("id de l'utilisateur non valide"),
 
   body("email").isEmail().withMessage("email invalide"),
 
