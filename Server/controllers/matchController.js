@@ -1,4 +1,4 @@
-import Match from "../models/Match"
+import Match from "../models/Match.js"
 
 
 
@@ -20,15 +20,10 @@ const getMatch = async (req, res, next) => {
     }
 }
 
-const createMatch = async (tournament,level, player1, player2, next) => {
-    if (!player1) {
-        player1 = "tbd";
-    }
-    if (!player2) {
-        player2 = "tbd";
-    }
+const createMatch = async (tournament, number,round , next) => {
     try {
-        const match = await Match.create({ tournament, level, player1, player2 });
+        const match = await Match.create({ tournament, number, round });
+        return match;
     } catch (error) {
         next(error);
     }

@@ -7,8 +7,13 @@ const tournamentSchema = new mongoose.Schema({
     location: { type: String, required: true },
     nbParticipants: { type: Number, required: true },
     bracketType: { type: String, required: true },
+    nbRounds: { type: Number, required: true },
     players: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    matches: [{ type: mongoose.Schema.Types.ObjectId, ref: "Match" }],
+    matches: [{
+        rounds: [{ type: mongoose.Schema.Types.ObjectId, ref: "Match" }],
+        roundNb: { type: Number, required: true },
+    }],
+
 }, {
     timestamps: true,
 });
