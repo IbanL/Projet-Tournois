@@ -4,16 +4,16 @@ import validateRequest from "../middlewares/validateRequest.js";
 
 import protect from "../middlewares/authMiddleware.js";
 
-import { validateMatchId } from "../validations/matchValidation.js";
+import { validateMatchId, validateMatchWinner } from "../validations/matchValidation.js";
 
 import {
     getMatches,
     getMatch,
-    updateMatch,
+    setWinnerMatch,
 } from "../controllers/matchController.js";
 
 router.get("/", getMatches);
 router.get("/:id",validateMatchId, validateRequest, getMatch);
-router.put("/:id",updateMatch);
+router.put("/:id",validateMatchWinner, validateRequest, setWinnerMatch);
 
 export default router;
