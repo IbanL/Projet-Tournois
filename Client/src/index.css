@@ -1,0 +1,14 @@
+body{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #38364f;
+  color : #FAF9F6;
+  font-family: "Roboto", sans-serif;
+}
+
+a{
+  text-decoration: none;
+  color : #FAF9F6;
+}

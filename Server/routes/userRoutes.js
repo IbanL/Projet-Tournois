@@ -20,7 +20,7 @@ import {
 } from "../validations/userValidation.js";
 
 router.get("/", getUsers);
-router.post("/",registerValidation, validateRequest, createUser);        
+router.post("/register",registerValidation, validateRequest, createUser);        
 router.get("/:id",validateUserId, validateRequest, getUser);
 router.put("/:id", protect, updateValidation, validateRequest, updateUser);
 router.post("/login",loginValidation, validateRequest, loginUser);
