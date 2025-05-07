@@ -20,7 +20,7 @@ const navbar = () => {
     }
 
     return (
-        <section>
+        <section className='navSection'>
             <div className='logoDiv'>
                 <Link to='/'>
                     <img src={logo} className='logo' alt="logo site tournois" />
@@ -28,12 +28,12 @@ const navbar = () => {
             </div>
             <nav>
                 <ul className='navbarList'>
-                    <li><Link to='/'>Accueil</Link></li>
+                    <li><Link to='/' className='navLink'>Accueil</Link></li>
 
                     {!isLoggedIn ? (
                         <>
-                    <li><Link to='/register'>Inscription</Link></li>
-                    <li><Link to='/login'>Connexion</Link></li>
+                    <li><Link to='/register' className='navLink'>Inscription</Link></li>
+                    <li><Link to='/login' className='navLink'>Connexion</Link></li>
                     </>
                     ) : (
                         <>

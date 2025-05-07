@@ -1,0 +1,76 @@
+.registerTitle{
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.registerForm{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    width: 30%;
+    margin: auto;
+}
+
+.registerLabel{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.registerInput{
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #FAF9F6;
+}
+
+.registerButton{
+    padding: 10px;
+    padding: 10px;
+    border-radius: 30px;
+    border:#202020 2px solid;
+    width: 70%;
+    margin: auto;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 1.1em;
+    background-color: #FAF9F6;
+    color: #302e44;
+}
+
+@keyframes buttonChange {
+    from{
+        background-color: #FAF9F6;
+        color: #302e44;
+    }
+    to{
+        background-color: #302e44;
+        color: #FAF9F6;
+    }
+}
+
+@keyframes buttonReverse {
+    from{
+        background-color: #302e44;
+        color: #FAF9F6;
+    }
+    to{
+        background-color: #FAF9F6;
+        color: #302e44;
+    }
+}
+
+.registerButton:hover{
+    cursor: pointer;
+    color: #FAF9F6;
+    background-color: #302e44;
+    animation-name: buttonChange;
+    animation-duration: 0.5s;
+}
+
+.registerButton:not(:hover){
+    animation-name: buttonReverse;
+    animation-duration: 0.5s;
+}

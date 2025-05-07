@@ -27,12 +27,12 @@ const Register = () => {
 
   return (
     <>
-      <h2>inscription</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor="name">nom:</label>
+      <h1 className='registerTitle'>inscription</h1>
+      <form onSubmit={handleSubmit(onSubmit)} className='registerForm'>
+          <label htmlFor="name" className='registerLabel'>nom:</label>
           <input type="text"
             id='name'
+            className='registerInput'
             placeholder='nom ...'
             {...register('name', {
               required: "le nom est obligatoire",
@@ -47,9 +47,10 @@ const Register = () => {
             })} />
           {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
 
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email" className='registerLabel'>Email:</label>
           <input type="email"
             id='email'
+            className='registerInput'
             placeholder='exemple@email.com'
             {...register('email', {
               required: "l'email est obligatoire",
@@ -60,9 +61,10 @@ const Register = () => {
             })} />
           {errors.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
 
-          <label htmlFor="password"> mot de passe</label>
+          <label htmlFor="password" className='registerLabel'> mot de passe:</label>
           <input type="password"
             id='password'
+            className='registerInput'
             placeholder='*******'
             {...register('password', {
               required: "le mot de passe est obligatoire",
@@ -77,9 +79,10 @@ const Register = () => {
             })} />
           {errors.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
 
-          <label htmlFor="confirmPassword"> confirmer le mot de passe</label>
+          <label htmlFor="confirmPassword" className='registerLabel'> confirmer le mot de passe:</label>
           <input type="password"
             id='confirmPassword'
+            className='registerInput'
             placeholder='*******'
             {...register('confirmPassword', {
               required: "la confirmation du mot de passe est obligatoire",
@@ -92,9 +95,8 @@ const Register = () => {
           {errors.confirmPassword && <p style={{ color: "red" }}>{errors.confirmPassword.message}</p>}
 
           
-          <button type='submit'>s'inscrire</button>
+          <button type='submit' className='registerButton'>s'inscrire</button>
 
-        </div>
       </form>
     </>
   )

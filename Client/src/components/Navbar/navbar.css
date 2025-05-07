@@ -1,4 +1,4 @@
-section{
+.navSection{
     background-color: #302e44;
     display: flex;
     justify-content: space-between;
@@ -17,6 +17,6 @@ section{
     gap: 20px;
     margin-right: 10px;
 }
-a{
+.navLink{
     font-family: "Protest Strike", sans-serif;
 }

@@ -7,6 +7,8 @@ import Cookies from 'js-cookie';
 const Login = () => {
   const navigation = useNavigate()
   const { register, handleSubmit, formState: { errors } } = useForm()
+
+
   const onSubmit = async (data) => {
     try {
 
@@ -27,12 +29,12 @@ const Login = () => {
   }
   return (
     <>
-      <h2>Connection</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor="email">Email:</label>
+      <h1 className='loginTitle'>Connexion</h1>
+      <form className='loginForm' onSubmit={handleSubmit(onSubmit)}>
+          <label htmlFor="email" className='loginLabel'>Email:</label>
           <input type="email"
             id='email'
+            className='loginInput'
             placeholder='exemple@email.com'
             {...register('email', {
               required: "l'email est obligatoire",
@@ -43,9 +45,10 @@ const Login = () => {
             })} />
           {errors.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
 
-          <label htmlFor="password"> mot de passe</label>
+          <label htmlFor="password" className='loginLabel'> mot de passe:</label>
           <input type="password"
             id='password'
+            className='loginInput'
             placeholder='*******'
             {...register('password', {
               required: "le mot de passe est obligatoire",
@@ -60,9 +63,8 @@ const Login = () => {
             })} />
           {errors.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
 
-          <button type='submit'>se connecter</button>
+          <button id='submitButton' className='loginButton' type='submit'>se connecter</button>
 
-        </div>
       </form>
     </>
   )
