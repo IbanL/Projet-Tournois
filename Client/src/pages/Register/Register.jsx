@@ -7,12 +7,13 @@ const Register = () => {
 
   const navigation = useNavigate()
 
+  const registerButton = document.getElementById('registerButton');
+  setTimeout(() => registerButton.classList.remove('preload'), 500);
 
   const { register, handleSubmit, formState: { errors }, watch } = useForm()
 
   const onSubmit = async (data) => {
     try {
-      console.log("egg");
       
       const response = await axios.post(process.env.VITE_API_URL + 'users/register', data)
       alert('inscription reussie')
@@ -95,7 +96,7 @@ const Register = () => {
           {errors.confirmPassword && <p style={{ color: "red" }}>{errors.confirmPassword.message}</p>}
 
           
-          <button type='submit' className='registerButton'>s'inscrire</button>
+          <button type='submit' id='registerButton' className='registerButton preload'>s'inscrire</button>
 
       </form>
     </>

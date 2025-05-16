@@ -8,6 +8,8 @@ const Login = () => {
   const navigation = useNavigate()
   const { register, handleSubmit, formState: { errors } } = useForm()
 
+  const submitButton = document.getElementById('submitButton');
+  setTimeout(() => submitButton.classList.remove('preload'), 500);
 
   const onSubmit = async (data) => {
     try {
@@ -63,7 +65,7 @@ const Login = () => {
             })} />
           {errors.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
 
-          <button id='submitButton' className='loginButton' type='submit'>se connecter</button>
+          <button id='submitButton' className='loginButton preload' type='submit'>se connecter</button>
 
       </form>
     </>

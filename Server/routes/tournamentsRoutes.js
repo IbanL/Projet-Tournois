@@ -4,6 +4,7 @@ import validateRequest from "../middlewares/validateRequest.js";
 import protect from "../middlewares/authMiddleware.js";
 import {
     getTournaments,
+    getTournaments10,
     getTournament,
     createTournament,
     userRegisterTournament,
@@ -21,6 +22,7 @@ import {
 } from "../validations/tournamentValidation.js";
 
 router.get("/", getTournaments);
+router.get("/10", getTournaments10);
 router.post("/", protect, createTournamentValidation,  validateRequest,  createTournament);
 router.get("/:id", validateTournamentId, validateRequest, getTournament);
 router.post("/:id/register", protect, validateTournamentId, validateRequest, userRegisterTournament);

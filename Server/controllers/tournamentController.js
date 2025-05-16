@@ -13,6 +13,15 @@ const getTournaments = async (req, res, next) => {
     }
 }
 
+const getTournaments10 = async (req, res, next) => {
+    try {
+        const tournaments = await Tournament.find().sort({createdAt: -1}).limit(10).select("-players -rounds");
+        res.status(200).json({ tournaments });
+    } catch (error) {
+        next(error);
+    }
+}
+
 const getTournament = async (req, res, next) => {
     try {
         let tournament = await Tournament.findById(req.params.id).populate("players", ["_id", "name"]).populate("rounds.matches");
@@ -78,7 +87,15 @@ const userRegisterTournament = async (req, res, next) => {
         if (!tournament) {
             throw new Error("Le tournoi n'existe pas");
         }
+        if (tournament.players.includes(user)) {
+            throw new Error("Vous etes deja inscrit au tournoi");
+        }
+        if (tournament.nbInscrits >= tournament.nbParticipants) {
+            throw new Error("Le tournoi est plein");
+        }
+        
         tournament.players.push(user);
+        tournament.nbInscrits++;
         await tournament.save();
         await addUserTournament(user, tournament);
         res.status(200).json({ message: "Inscription au tournoi reussie" });
@@ -117,6 +134,7 @@ const removePlayer = async (req, res, next) => {
             throw new Error("Acces non autorise");
         }
         tournament.players.pull(user);
+        tournament.nbInscrits--;
         await tournament.save();
         user.Tournaments.pull(tournament);
         await user.save();
@@ -190,4 +208,4 @@ const shufflePlayers = (players) => {
             next(error);
         }
     }
-            export { getTournaments, getTournament, createTournament, userRegisterTournament, updateTournament, removePlayer, deleteTournament, startTournament };
+            export { getTournaments, getTournaments10, getTournament, createTournament, userRegisterTournament, updateTournament, removePlayer, deleteTournament, startTournament };

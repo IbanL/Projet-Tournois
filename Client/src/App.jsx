@@ -4,12 +4,9 @@ import Navbar from './components/Navbar/Navbar'
 import Home from './pages/Home/Home'
 import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
-import { set } from 'react-hook-form'
+import Tournament from './pages/Tournament/Tournament'
 
 function App() {
-
-  document.body.classList.add('preload');
-  setTimeout(() => document.body.classList.remove('preload'), 500);
 
   return (
     <>
@@ -20,6 +17,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<Home />} />
+          <Route path="/tournament/:id" element={<Tournament />} />
         </Routes>
       </Router>
     </>

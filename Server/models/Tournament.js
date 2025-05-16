@@ -7,6 +7,7 @@ const tournamentSchema = new mongoose.Schema({
     location: { type: String, required: true },
     isStarted: { type: Boolean, required: true, default: false },
     nbParticipants: { type: Number, required: true },
+    nbInscrits: { type: Number, default: 0 },
     bracketType: { type: String, required: true },
     nbRounds: { type: Number, required: true },
     players: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
