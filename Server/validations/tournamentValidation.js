@@ -21,5 +21,4 @@ export const updateTournamentValidation = [
 
 export const removePlayerValidation = [
         param("id").isMongoId().withMessage("id du tournoi non valide"),
-        body("userId").isMongoId().withMessage("id de l'utilisateur non valide"),
 ]

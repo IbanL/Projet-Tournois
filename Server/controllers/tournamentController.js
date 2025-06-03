@@ -28,6 +28,7 @@ const getTournament = async (req, res, next) => {
         tournament = await tournament.populate("rounds.matches.player1", ["_id", "name"]);
         tournament = await tournament.populate("rounds.matches.player2", ["_id", "name"]);
         tournament = await tournament.populate("rounds.matches.winner", ["_id", "name"]);
+        tournament = await tournament.populate("creator", ["_id", "name"]);
         if (!tournament) {
             throw new Error("Le tournoi n'existe pas");
         }
@@ -87,8 +88,10 @@ const userRegisterTournament = async (req, res, next) => {
         if (!tournament) {
             throw new Error("Le tournoi n'existe pas");
         }
-        if (tournament.players.includes(user)) {
+        if (tournament.players.includes(user._id)) {
+
             throw new Error("Vous etes deja inscrit au tournoi");
+            
         }
         if (tournament.nbInscrits >= tournament.nbParticipants) {
             throw new Error("Le tournoi est plein");
@@ -125,20 +128,16 @@ const updateTournament = async (req, res, next) => {
 const removePlayer = async (req, res, next) => {
     try {
         const tournament = await Tournament.findById(req.params.id);
-        const user = await User.findById(req.body.userId);
+        const user = await User.findById(req.user._id);
         if (!tournament) {
             throw new Error("Le tournoi n'existe pas");
-        }
-        const isCreator = tournament.creator.toString() === req.user._id.toString() || user._id.toString() === req.user._id.toString();
-        if (!isCreator) {
-            throw new Error("Acces non autorise");
         }
         tournament.players.pull(user);
         tournament.nbInscrits--;
         await tournament.save();
         user.Tournaments.pull(tournament);
         await user.save();
-        res.status(200).json({ tournament });
+        res.status(200).json({ message : "Vous avez ete retirer du tournoi" });
     } catch (error) {
         next(error);
     }

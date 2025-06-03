@@ -12,3 +12,7 @@ a{
   text-decoration: none;
   color : #FAF9F6;
 }
+
+button{
+  cursor: pointer;
+}

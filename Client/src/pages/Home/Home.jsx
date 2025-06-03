@@ -45,11 +45,11 @@ const Home = () => {
         {
           tournaments10 ? (
             tournaments10.map(tournament => (
-              <Link to={`/tournament/${tournament._id}`} key={tournament._id} className='tournamentLink'>
-                <div className='tournamentCard'><h3 className='tournamentName'>{tournament.name}</h3>
-                  <p className='tournamentDate'>{tournament.date.slice(0, 10)}</p>
-                  <p className='tournamentLocation'>{tournament.location}</p>
-                  <p className='tournamentPlayers'>{tournament.nbInscrits}/{tournament.nbParticipants}</p>
+              <Link to={`/tournament/${tournament._id}`} key={tournament._id} className='tournamentsLink'>
+                <div className='tournamentsCard'><h3 className='tournamentsName'>{tournament.name}</h3>
+                  <p className='tournamentsDate'>{tournament.date.slice(0, 10)}</p>
+                  <p className='tournamentsLocation'>{tournament.location}</p>
+                  <p className='tournamentsPlayers'>{tournament.nbInscrits}/{tournament.nbParticipants}</p>
                 </div>
               </Link>
             ))) : (

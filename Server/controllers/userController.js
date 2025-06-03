@@ -95,14 +95,14 @@ const loginUser = async (req, res, next) => {
       if (!match) {
         throw new Error("Mot de passe ou email incorrect");
       }
-  
-      const token = createToken(user._id);
+      const userId = user._id;
+      const token = createToken(userId);
   
       res.cookie("token", token, {
         httpOnly: true,
       });
   
-      res.status(200).json({ user, token });
+      res.status(200).json({ userId, token });
     } catch (error) {
       next(error);
     }

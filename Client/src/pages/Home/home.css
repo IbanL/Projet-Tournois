@@ -20,11 +20,11 @@
     gap: 10px;
 }
 
-.tournamentLink{
+.tournamentsLink{
     width: 50%;
 }
 
-.tournamentCard{
+.tournamentsCard{
     border: 2px solid black;
     border-radius: 15px;
     width: 100%;
@@ -37,27 +37,27 @@
     gap: 10px;
 }
 
-.tournamentCard *{
+.tournamentsCard *{
     margin: 0;
 }
 
-.tournamentName{
+.tournamentsName{
     text-align: center;
     grid-area: 1 / 1 / 2 / 2;
     margin: 0;
 }
 
-.tournamentDate{
+.tournamentsDate{
     text-align: center;
     grid-area: 2 / 1 / 3 / 2;
 }
 
-.tournamentLocation{
+.tournamentsLocation{
     text-align: center;
     grid-area: 1 / 3 / 2 / 3;
 }
 
-.tournamentPlayers{
+.tournamentsPlayers{
     text-align: center;
     grid-area: 2 / 3 / 3 / 4;
 }

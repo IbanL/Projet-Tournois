@@ -2,19 +2,13 @@ import './navbar.css'
 import logo from '/src/assets/logo.webp'
 import { Link, useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie';
-import { useEffect, useState } from 'react';
-const navbar = () => {
+const navbar = ({isLoggedIn, setIsLoggedIn}) => {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigation = useNavigate();
-
-    useEffect(() => {
-        const token = Cookies.get('token');
-        setIsLoggedIn(!!token);
-    }, []);
 
     const handleLogout = () => {
         Cookies.remove('token');
+        Cookies.remove('id');
         setIsLoggedIn(false);
         navigation('/login');
     }

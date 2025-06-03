@@ -1,0 +1,151 @@
+.tournamentName{
+    font-size: 2em;
+    text-align: center;
+    margin-top: 20px;
+}
+.tournamentCreator{
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 10px;
+}
+.tournamentDiv{
+    display: grid;
+    place-items: center;
+    grid-template-columns: 20vw 70vw;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    align-items: center;
+        margin-left: auto;
+    margin-right: auto;
+    width: 90vw;
+
+}
+.tournamentPlayers{
+    align-self: flex-start;
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 100%;
+    grid-area: 1 / 1 / 2 / 2;
+
+}
+
+.tournamentPlayersNumber{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+}
+.PlayersListTitle{
+    text-align: center;
+}
+
+.playersList{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+    height: 50vh;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #e1e0eb #302e44;
+}
+
+
+.btnInscription{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: #302e44;
+    color: #FAF9F6;
+    border: solid 2px #FAF9F6;
+    padding: 10px;
+}
+
+.btnDesinscription{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: #302e44;
+    color: #FAF9F6;
+    border: solid 2px #d20f0f;
+    padding: 10px;
+}
+
+
+
+
+
+/* DEBUT MATCHES */
+.tournamentMatches{
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    grid-area: 1 / 2 / 2 / 3;
+
+}
+.matchesTitle{
+    text-align: center;
+    font-size: 1.5em;
+}
+.secMatches{
+  display:flex;
+  flex-direction:row;
+  overflow: auto;
+  width: 100%;
+
+}
+.round{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  width:200px;
+  list-style:none;
+  padding:0;
+}
+  .round .spacer{ flex-grow:1; }
+  .round .spacer:first-child,
+  .round .spacer:last-child{ flex-grow:.5; }
+
+  .round .game-spacer{
+    flex-grow:1;
+  }
+
+/*
+ *  General Styles
+*/
+
+li.game{
+  padding-left:20px;
+}
+
+  li.game.winner{
+    font-weight:bold;
+  }
+  li.game span{
+    float:right;
+    margin-right:5px;
+  }
+
+  li.game-top{ border-bottom:1px solid #aaa; }
+
+  li.game-spacer{ 
+    border-right:1px solid #aaa;
+    min-height:40px;
+  }
+
+  li.game-bottom{ 
+    border-top:1px solid #aaa;
+  }
+/* fiN MATCHES */
