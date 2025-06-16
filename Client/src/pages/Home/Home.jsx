@@ -38,6 +38,9 @@ const Home = () => {
     <>
       <section className="hero">
         <h1 className='heroTitle'>Le site de gestion de tournois</h1>
+        <Link to="/tournament/create" className='heroLink'>
+        <button className='heroButton'>Créer un tournois</button>
+        </Link>
       </section>
 
       <section className='secTournaments'>

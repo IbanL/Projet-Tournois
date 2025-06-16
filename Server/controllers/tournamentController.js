@@ -50,8 +50,10 @@ const createTournament = async (req, res, next) => {
         }
         const nbRounds = Math.log2(nbParticipants);
         const tournament = await Tournament.create({ name, date, creator, location, nbParticipants, bracketType, nbRounds });
+        creator.createdTournaments.push(tournament);
+        await creator.save();
         await createRounds(tournament, next);
-        res.status(201).json({ "message": "Le tournoi a bien ete cree" });
+        res.status(201).json({"id": tournament._id, "message": "Le tournoi a bien ete cree" });
     } catch (error) {
         next(error);
     }
@@ -135,7 +137,7 @@ const removePlayer = async (req, res, next) => {
         tournament.players.pull(user);
         tournament.nbInscrits--;
         await tournament.save();
-        user.Tournaments.pull(tournament);
+        user.joinedTournaments.pull(tournament);
         await user.save();
         res.status(200).json({ message : "Vous avez ete retirer du tournoi" });
     } catch (error) {

@@ -82,7 +82,7 @@ Creation d'un site de gestion de tournois permettant la creation, gestion des ma
 3.  Créer un fichier `.env` dans le dossier backEnd avec les variables suivantes :
 
     ```ini
-    PORT = le_port_sohaité (e.g 3000)
+    PORT = le_port_sohaité (e.g 3001)
 
     # MongoDB
     MONGO_URI = votre_uri_mongodb

@@ -37,6 +37,12 @@ const getUser = async (req, res, next) => {
     if (!user) {
         throw new Error("utilisateur introvable");
     }
+    if (user.createdTournaments) {
+        await user.populate("createdTournaments", ["_id", "name", "date", "location", "nbInscrits", "nbParticipants"]);
+    }
+    if (user.joinedTournaments) {
+        await user.populate("joinedTournaments", ["_id", "name", "date", "location", "nbInscrits", "nbParticipants"]);
+    }
     res.status(200).json({ user });
     } catch (error) {
         next(error);
@@ -78,20 +84,17 @@ const createToken = (id) => {
 
 const loginUser = async (req, res, next) => {
     const { email, password } = req.body;
-  
     if (!email || !password) {
       throw new Error("Tous les champs sont obligatoires");
     }
-  
     try {
       const user = await User.findOne({ email }).select("+password");
-  
+      
       if (!user) {
         throw new Error("Mot de passe ou email incorrect");
       }
-  
       const match = await bcrypt.compare(password, user.password);
-  
+
       if (!match) {
         throw new Error("Mot de passe ou email incorrect");
       }
@@ -121,7 +124,7 @@ const loginUser = async (req, res, next) => {
 
 const addUserTournament = async (user, tournament) => {
     try {
-        user.Tournaments.push(tournament);
+        user.joinedTournaments.push(tournament);
         await user.save();
     } catch (error) {
         next(error);

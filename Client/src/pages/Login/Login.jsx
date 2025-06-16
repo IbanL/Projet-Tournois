@@ -16,8 +16,8 @@ const Login = () => {
 
       const response = await axios.post(process.env.VITE_API_URL + 'users/login', data)
 
-      Cookies.set('token', response.data.token, { expires: 7, secure: true });
-      Cookies.set('id', JSON.stringify(response.data.userId), { expires: 7, secure: true });
+      Cookies.set('token', response.data.token, { expires: 1, secure: true });
+      Cookies.set('id', JSON.stringify(response.data.userId), { expires: 1, secure: true });
       alert('connexion reussie')
       navigation("/")
       

@@ -7,7 +7,9 @@ import Home from './pages/Home/Home'
 import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
 import Tournament from './pages/Tournament/Tournament'
-
+import CreateTournament from './pages/CreateTournament/CreateTournament'
+import ProtectedRoute from './utils/ProtectedRoute'
+import UserProfile from './pages/UserProfile/UserProfile'
 function App() {
 
       const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,6 +30,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<Home />} />
           <Route path="/tournament/:id" element={<Tournament isLoggedIn={isLoggedIn} />} />
+          <Route path="/tournament/create" element={ <ProtectedRoute>  <CreateTournament isLoggedIn={isLoggedIn} />    </ProtectedRoute>} />
+          <Route path="/profil/:id" element={<UserProfile/>} />
         </Routes>
       </Router>
     </>

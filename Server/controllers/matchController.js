@@ -38,9 +38,9 @@ const setWinnerMatch = async (req, res, next) => {
         if (!match.player1 || !match.player2) {
             throw new Error("Le match n'a pas deux joueurs");
         }
-        // if (match.winner) {
-        //     throw new Error("Le match a deja un vainqueur");
-        // }
+        if (match.winner) {
+            throw new Error("Le match a deja un vainqueur");
+        }
         const isFromMatch = match.player1.toString() === req.body.winner.toString() || match.player2.toString() === req.body.winner.toString();
         if (!isFromMatch) {
             throw new Error("Le vainqueur n'appartient pas au match");

@@ -13,6 +13,8 @@ const Tournament = ({ isLoggedIn }) => {
     const [tournament, setTournament] = useState([])
     const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
     const [playerState, setPlayerState] = useState("notLoggedIn");
+    const [isCreator, setIsCreator] = useState(false);
+
 
     const handleInscription = async () => {
         try {
@@ -68,24 +70,30 @@ const Tournament = ({ isLoggedIn }) => {
     }
 
     const checkRegistration = () => {
+
+
         if (isLoggedIn) {
             setPlayerState("loggedIn");
         }
-        const currentId = Cookies.get('id');
+        if (tournament.players) {
+            const currentId = Cookies.get('id');
 
-        if (currentId) {
-            for (const player of tournament.players) {
+            if (currentId) {
+                for (const player of tournament.players) {
 
-                if (JSON.stringify(player._id) === currentId) {
-                    setPlayerState("registered");
-                    break;
+                    if (JSON.stringify(player._id) === currentId) {
+                        setPlayerState("registered");
+                        break;
+                    }
                 }
             }
         }
 
     }
     const renderSwitch = (playerState) => {
-
+        if (tournament.isStarted) {
+            return
+        }
         switch (playerState) {
             case "loggedIn":
                 return <button className="btnInscription" onClick={handleInscription} >Inscription</button>
@@ -96,14 +104,77 @@ const Tournament = ({ isLoggedIn }) => {
         }
     }
 
+    const renderStartTournament = () => {
+        if (tournament.isStarted) {
+            return <h2 className="startedTournament">Le tournois a deja commencé </h2>
+        } else if (isCreator) {
+            return <button className="btnStartTournament" onClick={handleStartTournament}> lancer le tournois </button>
+        }
+    }
+
+    const checkCreator = () => {
+        console.log(tournament);
+        if (!tournament.creator) {
+            return;
+        } else if (!Cookies.get('id')) {
+            return;
+        }
+
+        if (tournament.creator._id === JSON.parse(Cookies.get('id'))) {
+
+            setIsCreator(true);
+
+        }
+    }
+
+    const handleSetWinner = async (matchId, winner) => {
+        if (!confirm(`Etes-vous sur de vouloir confirmer ${winner.name} comme vainqueur de ce match ?`)) {
+            return
+        }
+        try {
+            const res = await axios.put(process.env.VITE_API_URL + 'matches/' + matchId, {
+                winner: winner._id
+            }, {
+                headers: {
+                    'Authorization': Cookies.get('token')
+                }
+            });
+            alert(`${winner.name} a gagner le match`);
+            forceUpdate();
+        }
+        catch (error) {
+            alert(error.response.data.message);
+        }
+    }
+
+    const handleStartTournament = async () => {
+
+        if (!confirm(`Etes-vous sur de vouloir lancer le tournois ?`)) {
+            return
+        }
+        try {
+            const res = await axios.post(process.env.VITE_API_URL + 'tournaments/' + id + "/start/", null, {
+                headers: {
+                    'Authorization': Cookies.get('token')
+                }
+            });
+            alert(res.data.message);
+            forceUpdate();
+        }
+        catch (error) {
+            alert(error.response.data.message);
+        }
+    }
+
     useEffect(() => {
         fetchTournament()
     }, [ignored]);
 
 
     useEffect(() => {
-        if (tournament && tournament.players && tournament.players.length > 0) {
+        if (tournament) {
             checkRegistration();
+            checkCreator();
         }
     }, [tournament]);
 
@@ -115,6 +186,7 @@ const Tournament = ({ isLoggedIn }) => {
                     <h1 className="tournamentName">{tournament.name}</h1>
                     <p className="tournamentCreator">Organisateur: {tournament.creator.name}</p>
                     {renderSwitch(playerState)}
+                    {renderStartTournament()}
 
                     <div className="tournamentDiv">
                         <section className="tournamentPlayers">
@@ -131,112 +203,49 @@ const Tournament = ({ isLoggedIn }) => {
                         </section>
                         <section className="tournamentMatches">
                             <h2 className="matchesTitle">Matches</h2>
-                            <section class="secMatches">
-                                <ul class="round round-1">
-                                    <li class="spacer">&nbsp;</li>
+                            <section className="secMatches">
+                                {tournament.rounds.map((round, index) => (
+                                    <div key={index} className="round">
+                                        <h3 className="roundTitle">Round {index + 1}</h3>
+                                        <ul className="roundList">
+                                            {round.matches.map((match, matchIndex) => (
+                                                <li key={matchIndex}>
+                                                    <div className="match">
 
-                                    <li class="game game-top winner">Lousville <span>79</span></li>
-                                    <li class="game game-spacer">&nbsp;</li>
-                                    <li class="game game-bottom ">NC A&T <span>48</span></li>
+                                                        <p className="matchNumber">n°{match.number}</p>
+                                                        <div className="matchData">
+                                                            <p className={match.winner ? match.winner._id === match.player1._id ? "winner matchPlayer1" : "matchPlayer1 looser" : "matchPlayer1" }>{match.player1 ? match.player1.name : "TBD"}</p>
+                                                            <p className={match.winner ? match.winner._id === match.player2._id ? "winner matchPlayer2" : "matchPlayer2 looser" : "matchPlayer2"} >{match.player2 ? match.player2.name : "TBD"}</p>
+                                                        </div>
 
-                                    <li class="spacer">&nbsp;</li>
-
-                                    <li class="game game-top winner">Colo St <span>84</span></li>
-                                    <li class="game game-spacer">&nbsp;</li>
-                                    <li class="game game-bottom ">Missouri <span>72</span></li>
-
-                                    <li class="spacer">&nbsp;</li>
-
-                                    <li class="game game-top ">Oklahoma St <span>55</span></li>
-                                    <li class="game game-spacer">&nbsp;</li>
-                                    <li class="game game-bottom winner">Oregon <span>68</span></li>
-
-                                    <li class="spacer">&nbsp;</li>
-
-                                    <li class="game game-top winner">Saint Louis <span>64</span></li>
-                                    <li class="game game-spacer">&nbsp;</li>
-                                    <li class="game game-bottom ">New Mexico St <span>44</span></li>
-
-                                    <li class="spacer">&nbsp;</li>
-
-                                    <li class="game game-top winner">Memphis <span>54</span></li>
-                                    <li class="game game-spacer">&nbsp;</li>
-                                    <li class="game game-bottom ">St Mary's <span>52</span></li>
-
-                                    <li class="spacer">&nbsp;</li>
-
-                                    <li class="game game-top winner">Mich St <span>65</span></li>
-                                    <li class="game game-spacer">&nbsp;</li>
-                                    <li class="game game-bottom ">Valparaiso <span>54</span></li>
-
-                                    <li class="spacer">&nbsp;</li>
-
-                                    <li class="game game-top winner">Creighton <span>67</span></li>
-                                    <li class="game game-spacer">&nbsp;</li>
-                                    <li class="game game-bottom ">Cincinnati <span>63</span></li>
-
-                                    <li class="spacer">&nbsp;</li>
-
-                                    <li class="game game-top winner">Duke <span>73</span></li>
-                                    <li class="game game-spacer">&nbsp;</li>
-                                    <li class="game game-bottom ">Albany <span>61</span></li>
-
-                                    <li class="spacer">&nbsp;</li>
-                                </ul>
-                                <ul class="round round-2">
-                                    <li class="spacer">&nbsp;</li>
-
-                                    <li class="game game-top winner">Lousville <span>82</span></li>
-                                    <li class="game game-spacer">&nbsp;</li>
-                                    <li class="game game-bottom ">Colo St <span>56</span></li>
-
-                                    <li class="spacer">&nbsp;</li>
-
-                                    <li class="game game-top winner">Oregon <span>74</span></li>
-                                    <li class="game game-spacer">&nbsp;</li>
-                                    <li class="game game-bottom ">Saint Louis <span>57</span></li>
-
-                                    <li class="spacer">&nbsp;</li>
-
-                                    <li class="game game-top ">Memphis <span>48</span></li>
-                                    <li class="game game-spacer">&nbsp;</li>
-                                    <li class="game game-bottom winner">Mich St <span>70</span></li>
-
-                                    <li class="spacer">&nbsp;</li>
-
-                                    <li class="game game-top ">Creighton <span>50</span></li>
-                                    <li class="game game-spacer">&nbsp;</li>
-                                    <li class="game game-bottom winner">Duke <span>66</span></li>
-
-                                    <li class="spacer">&nbsp;</li>
-                                </ul>
-                                <ul class="round round-3">
-                                    <li class="spacer">&nbsp;</li>
-
-                                    <li class="game game-top winner">Lousville <span>77</span></li>
-                                    <li class="game game-spacer">&nbsp;</li>
-                                    <li class="game game-bottom ">Oregon <span>69</span></li>
-
-                                    <li class="spacer">&nbsp;</li>
-
-                                    <li class="game game-top ">Mich St <span>61</span></li>
-                                    <li class="game game-spacer">&nbsp;</li>
-                                    <li class="game game-bottom winner">Duke <span>71</span></li>
-
-                                    <li class="spacer">&nbsp;</li>
-                                </ul>
-                                <ul class="round round-4">
-                                    <li class="spacer">&nbsp;</li>
-
-                                    <li class="game game-top winner">Lousville <span>85</span></li>
-                                    <li class="game game-spacer">&nbsp;</li>
-                                    <li class="game game-bottom ">Duke <span>63</span></li>
-
-                                    <li class="spacer">&nbsp;</li>
-                                </ul>
+                                                        {
+                                                            isCreator && match.player1 != null && match.player2 != null && match.winner === null ?
+                                                                <div className="matchSetWinner">
+                                                                    <button onClick={() => handleSetWinner(match._id, match.player1)}>gagnant</button>
+                                                                    <button onClick={() => handleSetWinner(match._id, match.player2)}>gagnant</button>
+                                                                </div>
+                                                                :
+                                                                null
+                                                        }
+                                                    </div>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                ))}
                             </section>
                         </section>
                     </div>
+                    <style jsx="true">
+                        {`
+                        
+                            .secMatches{
+                                display:grid;
+                                grid-template-columns: repeat( ${tournament.rounds.length}, 1fr);
+                                gap: 10px;
+                            }
+                        `}
+                    </style>
                 </>
             }
         </>
