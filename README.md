@@ -7,7 +7,7 @@
 
 <div align="center">
 
-C'est un projet qui a pour but de valider mon TP de dev web
+Site de gestion de Tournois de sport / jeu
 
 </div>
 
