@@ -147,16 +147,20 @@ const removePlayer = async (req, res, next) => {
 
 const deleteTournament = async (req, res, next) => {
     try {
-        const tournament = await Tournament.findById(req.params.id).populate("players");
+        let tournament = await Tournament.findById(req.params.id).populate("players");
+        tournament = await tournament.populate("creator");
         if (!tournament) {
             throw new Error("Le tournoi n'existe pas");
-        }
-        const isCreator = tournament.creator.toString() === req.user._id.toString();
+        }        
+        const isCreator = tournament.creator._id.toString() === req.user._id.toString();
         if (!isCreator) {
             throw new Error("Acces non autorise");
         }
+        const creator = tournament.creator
+        creator.createdTournaments.pull(tournament)
+        await creator.save();
         tournament.players.forEach(async (player) => {
-            player.Tournaments.pull(tournament);
+            player.joinedTournaments.pull(tournament);
             await player.save();
         })
         await Match.deleteMany({ tournament: req.params.id });
