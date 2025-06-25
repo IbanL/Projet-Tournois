@@ -147,17 +147,6 @@ Creation d'un site de gestion de tournois permettant la creation, gestion des ma
   }
 ```
 
-## comptes de test
-
-```ini
-Email : il641@egg.fr
-        -----------
-        il648@egg.fr
-
-Mot de passe : il641il641
-                --------
-               il648il648
-```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -237,9 +226,8 @@ Mot de passe : il641il641
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-## Tests et Visualisation
+## Tests
 
-- **MongoDB Compass** : Visualisation des données
 - **Postman** : Tests des routes API
 
 </br>
