@@ -23,7 +23,7 @@ Site de gestion de Tournois de sport / jeu
   - [Backend](#backend)
 - [Test en tant qu'admin](#test-en-tant-quadmin)
 - [Arborescence](#arborescence)
-- [Tests et Visualisation](#tests-et-visualisation)
+- [Tests](#tests)
 <!-- - [Demo](#demo)
   - [Backend - Render](#backend---render)
   - [Frontend - Vercel](#frontend---vercel) -->
