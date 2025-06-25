@@ -15,11 +15,16 @@
     grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    align-items: center;
+    align-items: start;
         margin-left: auto;
     margin-right: auto;
     width: 90vw;
-
+}
+@media screen and (max-width: 600px) {
+    .tournamentDiv{
+        display: flex;
+        flex-direction: column;
+    }
 }
 .tournamentPlayers{
     align-self: flex-start;
@@ -106,12 +111,21 @@
     border: 2px solid black;
     border-radius: 15px;
     width: 100%;
-    height: 100%;
+    height: 68vh;
 
 }
 .matchesTitle{
     text-align: center;
     font-size: 1.5em;
+}
+.secMatches{
+    overflow: auto;
+    height: 80%;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #e1e0eb #302e44;
 }
 .round{
   display: flex;
@@ -119,6 +133,12 @@
   align-items: center;
   border-right: 2px solid black;
   padding: 10px;
+  width: 200px;
+}
+.roundList{
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 .match{
   display: flex;

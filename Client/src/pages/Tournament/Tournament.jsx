@@ -3,7 +3,6 @@ import axios from "axios";
 import { useEffect, useState, useReducer } from "react";
 import Cookies from "js-cookie";
 import { Link, useParams } from "react-router-dom";
-import { set } from "react-hook-form";
 
 const Tournament = ({ isLoggedIn }) => {
 

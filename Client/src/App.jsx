@@ -10,6 +10,8 @@ import Tournament from './pages/Tournament/Tournament'
 import CreateTournament from './pages/CreateTournament/CreateTournament'
 import ProtectedRoute from './utils/ProtectedRoute'
 import UserProfile from './pages/UserProfile/UserProfile'
+import Footer from './components/Footer/Footer'
+
 function App() {
 
       const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,7 +24,9 @@ function App() {
 
   return (
     <>
+
       <Router>
+            <div className="App">
         <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -33,7 +37,10 @@ function App() {
           <Route path="/tournament/create" element={ <ProtectedRoute>  <CreateTournament isLoggedIn={isLoggedIn} />    </ProtectedRoute>} />
           <Route path="/profil/:id" element={<UserProfile/>} />
         </Routes>
+        <Footer/>
+              </div>
       </Router>
+
     </>
   )
 }

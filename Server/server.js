@@ -6,10 +6,14 @@ import cors from "cors";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 
+const options = {
+    origin: "http://localhost:5173"
+};
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors(options));
 app.use(helmet());
 app.use(cookieParser());
 
@@ -28,13 +32,13 @@ app.use("/api/tournaments", tournamentRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-app.get("/", (req,res) => {
+app.get("/", (req, res) => {
     res.send("bienvenue sur le back de l'application tournois");
 })
 
 
 app.use(errorHandler);
 
-app.listen(PORT, () =>{ 
-    console.log("server opérationnel sur http://localhost:"+PORT);
+app.listen(PORT, () => {
+    console.log("server opérationnel sur http://localhost:" + PORT);
 });
