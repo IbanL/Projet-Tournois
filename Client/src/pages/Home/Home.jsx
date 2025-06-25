@@ -35,7 +35,7 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <div>
       <section className="hero">
         <h1 className='heroTitle'>Le site de gestion de tournois</h1>
         <Link to="/tournament/create" className='heroLink'>
@@ -60,7 +60,7 @@ const Home = () => {
           )
         }
       </section>
-    </>
+    </div>
   )
 }
 

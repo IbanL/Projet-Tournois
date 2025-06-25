@@ -179,7 +179,7 @@ const Tournament = ({ isLoggedIn }) => {
 
 
     return (
-        <>
+        <div>
             {loading ? <p>Chargement...</p> :
                 <>
                     <h1 className="tournamentName">{tournament.name}</h1>
@@ -213,7 +213,7 @@ const Tournament = ({ isLoggedIn }) => {
 
                                                         <p className="matchNumber">n°{match.number}</p>
                                                         <div className="matchData">
-                                                            <p className={match.winner ? match.winner._id === match.player1._id ? "winner matchPlayer1" : "matchPlayer1 looser" : "matchPlayer1" }>{match.player1 ? match.player1.name : "TBD"}</p>
+                                                            <p className={match.winner ? match.winner._id === match.player1._id ? "winner matchPlayer1" : "matchPlayer1 looser" : "matchPlayer1"}>{match.player1 ? match.player1.name : "TBD"}</p>
                                                             <p className={match.winner ? match.winner._id === match.player2._id ? "winner matchPlayer2" : "matchPlayer2 looser" : "matchPlayer2"} >{match.player2 ? match.player2.name : "TBD"}</p>
                                                         </div>
 
@@ -240,14 +240,14 @@ const Tournament = ({ isLoggedIn }) => {
                         
                             .secMatches{
                                 display:grid;
-                                grid-template-columns: repeat( ${tournament.rounds.length}, 1fr);
+                                grid-template-columns: repeat( ${tournament.rounds.length}, 200px);
                                 gap: 10px;
                             }
                         `}
                     </style>
                 </>
             }
-        </>
+        </div>
     )
 }
 

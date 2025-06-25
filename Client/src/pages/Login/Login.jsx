@@ -31,7 +31,7 @@ const Login = () => {
     }
   }
   return (
-    <>
+    <section className='loginSec'>
       <h1 className='loginTitle'>Connexion</h1>
       <form className='loginForm' onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="email" className='loginLabel'>Email:</label>
@@ -69,7 +69,7 @@ const Login = () => {
           <button id='submitButton' className='loginButton preload' type='submit'>se connecter</button>
 
       </form>
-    </>
+    </section>
   )
 }
 export default Login

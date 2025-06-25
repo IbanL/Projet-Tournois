@@ -27,7 +27,7 @@ const Register = () => {
 
 
   return (
-    <>
+    <section className='registerSec'>
       <h1 className='registerTitle'>inscription</h1>
       <form onSubmit={handleSubmit(onSubmit)} className='registerForm'>
           <label htmlFor="name" className='registerLabel'>nom:</label>
@@ -99,7 +99,7 @@ const Register = () => {
           <button type='submit' id='registerButton' className='registerButton preload'>s'inscrire</button>
 
       </form>
-    </>
+    </section>
   )
 }
 

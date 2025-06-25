@@ -14,31 +14,31 @@ import Footer from './components/Footer/Footer'
 
 function App() {
 
-      const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
-          useEffect(() => {
-              const token = Cookies.get('token');
-              setIsLoggedIn(!!token);
-          }, []);
-      
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = Cookies.get('token');
+    setIsLoggedIn(!!token);
+  }, []);
+
 
   return (
     <>
 
       <Router>
-            <div className="app">
-        <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="*" element={<Home />} />
-          <Route path="/tournament/:id" element={<Tournament isLoggedIn={isLoggedIn} />} />
-          <Route path="/tournament/create" element={ <ProtectedRoute>  <CreateTournament isLoggedIn={isLoggedIn} />    </ProtectedRoute>} />
-          <Route path="/profil/:id" element={<UserProfile/>} />
-        </Routes>
-        <Footer/>
-              </div>
+        <div className="app">
+          <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<Home />} />
+            <Route path="/tournament/:id" element={<Tournament isLoggedIn={isLoggedIn} />} />
+            <Route path="/tournament/create" element={<ProtectedRoute>  <CreateTournament isLoggedIn={isLoggedIn} />    </ProtectedRoute>} />
+            <Route path="/profil/:id" element={<UserProfile />} />
+          </Routes>
+          <Footer />
+        </div>
       </Router>
 
     </>
