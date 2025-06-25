@@ -12,6 +12,11 @@
     width: 30%;
     margin: auto;
 }
+@media screen and (max-width: 600px) {
+    .registerForm{
+        width: 70%;
+    }  
+}
 
 .registerLabel{
     font-size: 1.2em;

@@ -26,7 +26,7 @@ function App() {
     <>
 
       <Router>
-            <div className="App">
+            <div className="app">
         <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
           <Route path="/" element={<Home />} />

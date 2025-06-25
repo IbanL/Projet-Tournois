@@ -12,6 +12,11 @@
     width: 30%;
     margin: auto;
 }
+@media screen and (max-width: 600px) {
+    .loginForm{
+        width: 70%;
+    }  
+}
 
 .loginLabel{
     font-size: 1.2em;

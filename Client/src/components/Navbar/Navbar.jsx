@@ -66,11 +66,12 @@ const navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                 flex-direction: column;
                 list-style: none;
                 height: 95vh;
-                width: 50vw;
+                width: 100px;
                 text-align: center;
                 background-color: #302e44;
-                margin-right: 10px;
+                margin-right: 0px;
                 gap: 20px;
+                padding: 0px;
                 margin-top: 0px;
                 margin-bottom: 0px;
             }

@@ -10,6 +10,11 @@
     width: 30%;
     margin: auto;
 }
+@media screen and (max-width: 600px) {
+    .createTournamentForm{
+        width: 70%;
+    }  
+}
 
 .createTournamentButton{
     padding: 10px;
