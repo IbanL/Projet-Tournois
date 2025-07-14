@@ -1,4 +1,4 @@
-import './Register.css'
+import './register.css'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
