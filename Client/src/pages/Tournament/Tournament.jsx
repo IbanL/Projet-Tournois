@@ -1,4 +1,4 @@
-import "./Tournament.css";
+import "./tournament.css";
 import axios from "axios";
 import { useEffect, useState, useReducer } from "react";
 import Cookies from "js-cookie";
