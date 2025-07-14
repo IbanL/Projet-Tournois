@@ -7,7 +7,7 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 
 const options = {
-    origin: "http://localhost:5173"
+    origin: ["http://localhost:5173","https://projet-tournois.vercel.app"]
 };
 
 const app = express();
